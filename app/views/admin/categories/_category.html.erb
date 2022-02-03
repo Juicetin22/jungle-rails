@@ -7,6 +7,6 @@
     <%= category.products.length %>
   </td>
   <td>
-    <%= link_to fa_icon('trash'), admin_categories_path, class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %>
+    <%= link_to "Products in #{category.name}", category_path(category.id), class: "btn btn-primary" %>
   </td>
 </tr>
