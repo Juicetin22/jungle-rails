@@ -8,7 +8,7 @@
           <h2><%= @number_of_products %></h2>
         </td>
         <td>
-          <%= link_to 'Products List', admin_products_path, class: "btn btn-primary" %>
+          <%= link_to 'Products List', admin_products_path, class: "btn btn-success" %>
         </td>
       </tr>
       <tr>
@@ -17,9 +17,9 @@
           <h2><%= @number_of_categories %></h2>
         </td>
         <td>
-          <%= link_to 'Apparel', category_path(1), class: "btn btn-info" %>
-          <%= link_to 'Electronics', category_path(2), class: "btn btn-warning" %>
-          <%= link_to 'Furniture', category_path(3), class: "btn btn-success" %>
+          <% @categories.each do |category| %>
+            <%= link_to "#{category.name}", category_path(category.id), class: "btn btn-info" %>
+          <% end %>
         </td>
       </tr>
     </tbody>
