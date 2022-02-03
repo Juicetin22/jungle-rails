@@ -1,2 +1,28 @@
-<h1>Admin::Dashboard#show</h1>
-<p>Find me in app/views/admin/dashboard/show.html.erb</p>
+<div class="jumbotron">
+  <h2>Admin Dashboard</h2>
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>
+          Number of products in store:
+          <h2><%= @number_of_products %></h2>
+        </td>
+        <td>
+          <%= link_to 'Products List', admin_products_path, class: "btn btn-primary" %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Number of product categories:
+          <h2><%= @number_of_categories %></h2>
+        </td>
+        <td>
+          <%= link_to 'Apparel', category_path(1), class: "btn btn-info" %>
+          <%= link_to 'Electronics', category_path(2), class: "btn btn-warning" %>
+          <%= link_to 'Furniture', category_path(3), class: "btn btn-success" %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
