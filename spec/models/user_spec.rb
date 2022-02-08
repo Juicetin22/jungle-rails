@@ -67,7 +67,7 @@ RSpec.describe User, type: :model do
       expect(@user.errors.messages[:first_name]).to include "can't be blank"
     end
 
-    it 'should not save if first name field is empty' do
+    it 'should not save if last name field is empty' do
       @user = User.new
       @user.first_name = "Moo"
       @user.last_name = nil
@@ -84,6 +84,25 @@ RSpec.describe User, type: :model do
 
       expect(@user.save).to be false
       expect(@user.errors.messages[:last_name]).to include "can't be blank"
+    end
+
+    it 'should not save if email field is empty' do
+      @user = User.new
+      @user.first_name = "Moo"
+      @user.last_name = "Boo"
+      @user.email = nil
+      @user.password = "mooboo"
+      @user.password_confirmation = "mooboo"
+      
+      @user.save
+
+      puts "------------user test---------------"
+      puts @user.errors.messages
+      puts @user.errors.full_messages
+      puts "---------------------------"
+
+      expect(@user.save).to be false
+      expect(@user.errors.messages[:email]).to include "can't be blank"
     end
   end
 end
