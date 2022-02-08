@@ -176,6 +176,32 @@ RSpec.describe User, type: :model do
       @login = User.authenticate_with_credentials("  moo@boo.com  ", "mooboo")
       expect(@login).not_to be nil
     end
+
+    it 'should allow users to login in successfully even if there are some characters have the wrong case in email address' do
+      @user = User.new
+      @user.first_name = "Moo"
+      @user.last_name = "Boo"
+      @user.email = "moo@boo.com"
+      @user.password = "mooboo"
+      @user.password_confirmation = "mooboo"
+      @user.save
+
+      @login = User.authenticate_with_credentials("MoO@boo.com", "mooboo")
+      expect(@login).not_to be nil
+    end
+
+    it 'should allow users to login in successfully even if there are spaces outside of email address and characters have the wrong case in address' do
+      @user = User.new
+      @user.first_name = "Moo"
+      @user.last_name = "Boo"
+      @user.email = "moo@boo.com"
+      @user.password = "mooboo"
+      @user.password_confirmation = "mooboo"
+      @user.save
+
+      @login = User.authenticate_with_credentials("   MoO@boo.com   ", "mooboo")
+      expect(@login).not_to be nil
+    end
   end
 
   describe '.authenticate_with_credentials' do
