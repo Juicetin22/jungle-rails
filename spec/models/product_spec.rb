@@ -17,7 +17,7 @@ RSpec.describe Product, type: :model do
       puts @product.errors.messages
       puts "---------------------------"
       expect(@product.save).to be true
-      # expect(@product.errors.messages[:category]).to include "can't be blank"
+      expect(@product.errors.messages.length).to be 0
     end
 
     it 'should prevent saving the product info when the name is not present' do
