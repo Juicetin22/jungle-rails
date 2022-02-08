@@ -29,7 +29,7 @@ RSpec.describe Product, type: :model do
       @product.category_id = @category.id
       @product.save
 
-      puts "---------------------------"
+      puts "------------name test---------------"
       puts @product.errors.messages
       puts @product.errors.full_messages
       puts "---------------------------"
@@ -46,7 +46,7 @@ RSpec.describe Product, type: :model do
       @product.category_id = @category.id
       @product.save
 
-      puts "---------------------------"
+      puts "-----------price test----------------"
       puts @product.errors.messages
       puts @product.errors.full_messages
       puts "---------------------------"
@@ -63,12 +63,29 @@ RSpec.describe Product, type: :model do
       @product.category_id = @category.id
       @product.save
 
-      puts "---------------------------"
+      puts "----------quantity test-----------------"
       puts @product.errors.messages
       puts @product.errors.full_messages
       puts "---------------------------"
       expect(@product.save).to be false
       expect(@product.errors.messages[:quantity]).to include "can't be blank"
+    end
+
+    it 'should prevent saving the product info when the category is not present' do
+      @category = Category.create(name: "boose")
+      @product = Product.new
+      @product.name = "loose"
+      @product.price_cents = 20000
+      @product.quantity = 2222
+      @product.category_id = nil
+      @product.save
+
+      puts "------------category test---------------"
+      puts @product.errors.messages
+      puts @product.errors.full_messages
+      puts "---------------------------"
+      expect(@product.save).to be false
+      expect(@product.errors.messages[:category]).to include "can't be blank"
     end
   end
 end
