@@ -163,6 +163,19 @@ RSpec.describe User, type: :model do
       expect(@user.save).to be false
       expect(@user.password.length).to be < 5
     end
+
+    it 'should allow users to login in successfully even if there are spaces outside of email address' do
+      @user = User.new
+      @user.first_name = "Moo"
+      @user.last_name = "Boo"
+      @user.email = "moo@boo.com"
+      @user.password = "mooboo"
+      @user.password_confirmation = "mooboo"
+      @user.save
+
+      @login = User.authenticate_with_credentials("  moo@boo.com  ", "mooboo")
+      expect(@login).not_to be nil
+    end
   end
 
   describe '.authenticate_with_credentials' do
@@ -204,6 +217,5 @@ RSpec.describe User, type: :model do
       @login = User.authenticate_with_credentials("moo@boo.com", "moosgoos")
       expect(@login).to be nil
     end
-  
   end
 end
