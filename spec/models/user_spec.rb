@@ -19,6 +19,7 @@ RSpec.describe User, type: :model do
 
       expect(@user.save).to be true
       expect(@user.errors.messages.length).to be 0
+      expect(@user.password == @user.password_confirmation).to be true
     end
 
     it 'should not save if email is not unique' do
@@ -122,6 +123,25 @@ RSpec.describe User, type: :model do
 
       expect(@user.save).to be false
       expect(@user.errors.messages[:password]).to include "can't be blank"
+    end
+
+    it 'should not save if password confirmation is not equal to password' do
+      @user = User.new
+      @user.first_name = "Moo"
+      @user.last_name = "Boo"
+      @user.email = "moo@boo.com"
+      @user.password = "mooboo"
+      @user.password_confirmation = "moobo"
+      
+      @user.save
+
+      puts "------------user test---------------"
+      puts @user.errors.messages
+      puts @user.errors.full_messages
+      puts "---------------------------"
+
+      expect(@user.save).to be false
+      expect(@user.password == @user.password_confirmation).to be false
     end
   end
 end
