@@ -164,4 +164,46 @@ RSpec.describe User, type: :model do
       expect(@user.password.length).to be < 5
     end
   end
+
+  describe '.authenticate_with_credentials' do
+    it 'should login a user if method finds a correct user and password' do
+      @user = User.new
+      @user.first_name = "Moo"
+      @user.last_name = "Boo"
+      @user.email = "moo@boo.com"
+      @user.password = "mooboo"
+      @user.password_confirmation = "mooboo"
+      @user.save
+
+      @login = User.authenticate_with_credentials("moo@boo.com", "mooboo")
+      expect(@login).not_to be nil
+    end
+
+    it 'should return nil if email is not in the database' do
+      @user = User.new
+      @user.first_name = "Moo"
+      @user.last_name = "Boo"
+      @user.email = "moo@boo.com"
+      @user.password = "mooboo"
+      @user.password_confirmation = "mooboo"
+      @user.save
+
+      @login = User.authenticate_with_credentials("MOOSE@goose.com", "moosgoos")
+      expect(@login).to be nil
+    end
+
+    it 'should return nil if password inputted is incorrect' do
+      @user = User.new
+      @user.first_name = "Moo"
+      @user.last_name = "Boo"
+      @user.email = "moo@boo.com"
+      @user.password = "mooboo"
+      @user.password_confirmation = "mooboo"
+      @user.save
+
+      @login = User.authenticate_with_credentials("moo@boo.com", "moosgoos")
+      expect(@login).to be nil
+    end
+  
+  end
 end
