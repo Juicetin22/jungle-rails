@@ -104,5 +104,24 @@ RSpec.describe User, type: :model do
       expect(@user.save).to be false
       expect(@user.errors.messages[:email]).to include "can't be blank"
     end
+
+    it 'should not save if password field is empty' do
+      @user = User.new
+      @user.first_name = "Moo"
+      @user.last_name = "Boo"
+      @user.email = "moo@boo.com"
+      @user.password = nil
+      @user.password_confirmation = "mooboo"
+      
+      @user.save
+
+      puts "------------user test---------------"
+      puts @user.errors.messages
+      puts @user.errors.full_messages
+      puts "---------------------------"
+
+      expect(@user.save).to be false
+      expect(@user.errors.messages[:password]).to include "can't be blank"
+    end
   end
 end
