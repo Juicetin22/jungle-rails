@@ -36,5 +36,22 @@ RSpec.describe Product, type: :model do
       expect(@product.save).to be false
       expect(@product.errors.messages[:name]).to include "can't be blank"
     end
+
+    it 'should prevent saving the product info when the price is not present' do
+      @category = Category.create(name: "moose")
+      @product = Product.new
+      @product.name = "ploo"
+      @product.price_cents = nil
+      @product.quantity = 123
+      @product.category_id = @category.id
+      @product.save
+
+      puts "---------------------------"
+      puts @product.errors.messages
+      puts @product.errors.full_messages
+      puts "---------------------------"
+      expect(@product.save).to be false
+      expect(@product.errors.messages[:price]).to include "can't be blank"
+    end
   end
 end
