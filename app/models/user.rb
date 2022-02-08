@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true, length: { minimum: 5 }
 
   def self.authenticate_with_credentials(email, password)
-    modified_email = email.strip
+    modified_email = email.strip.downcase
     @user = User.find_by_email(modified_email)
     # if user exists AND the password entered is correct, return @user to session controller
     if @user && @user.authenticate(password)
