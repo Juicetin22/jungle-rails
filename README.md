@@ -4,7 +4,12 @@ Welcome to Jungle! This is a mini e-commerce application built with Rails 4.2 wh
 
 ## Final Product
 
-<!-- !["Screenshot of overall page"](https://github.com/Juicetin22/scheduler/blob/master/docs/overall-webpage.png) -->
+!["Screenshot of homepage"](https://github.com/Juicetin22/jungle-rails/blob/master/docs/homepage.png)
+
+!["Screenshot of a product's details page"](https://github.com/Juicetin22/jungle-rails/blob/master/docs/product-details.png)
+
+!["Screenshot of 'My Cart' page"](https://github.com/Juicetin22/jungle-rails/blob/master/docs/my-cart.png)
+
 
 ## Dependencies
 
@@ -31,5 +36,5 @@ Welcome to Jungle! This is a mini e-commerce application built with Rails 4.2 wh
 - You can also register and login as a new user, although guests can also purchase items without the need to.
 - Click on the product image, name, or details button on the bottom-right of the product card to display information about that single product.
 - Click on the 'Add' button if you want to purchase that item.
-- Clicking on your cart in the top right corner of the navigation bar will direct you to a checkout screen where you can make your purchase
+- Clicking on your cart in the top right corner of the navigation bar will direct you to a checkout screen where you can make your purchase.
 - I hope you enjoy our products!
