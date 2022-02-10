@@ -4,7 +4,9 @@ class UsersController < ApplicationController
   end
   
   def create
+    # create new user in database using params from registration form
     user = User.new(user_params)
+    # if validations pass and there are no issues in saving the user, then log user in
     if user.save
       session[:user_id] = user.id
       redirect_to '/'
